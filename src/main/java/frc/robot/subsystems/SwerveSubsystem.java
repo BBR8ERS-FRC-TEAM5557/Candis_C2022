@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.networktables.NetworkTableEntry;
+
 
 public class SwerveSubsystem extends SubsystemBase {
     private final SwerveModule frontLeft = new SwerveModule(
@@ -56,6 +58,14 @@ public class SwerveSubsystem extends SubsystemBase {
     private final AHRS gyro = new AHRS(SPI.Port.kMXP);
     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
             new Rotation2d(0));
+/** 
+    private SwerveModule[] modules = { frontLeft, frontRight, backLeft, backRight };
+
+    private NetworkTableEntry[] moduleAngleEntries = new NetworkTableEntry[modules.length];
+    private NetworkTableEntry poseXEntry;
+    private NetworkTableEntry poseYEntry;
+    private NetworkTableEntry poseAngleEntry;
+*/
 
     public SwerveSubsystem() {
         new Thread(() -> {
@@ -65,7 +75,10 @@ public class SwerveSubsystem extends SubsystemBase {
             } catch (Exception e) {
             }
         }).start();
-        /** 
+        
+        
+        //SmartDashboard.putNumber("swerve angle lawl", modules[0].getAbsoluteEncoderRad());
+/**
         ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
         poseXEntry = tab.add("Pose X", 0.0).withPosition(0, 0).withSize(1, 1).getEntry();
         poseYEntry = tab.add("Pose Y", 0.0).withPosition(0, 1).withSize(1, 1).getEntry();
@@ -86,7 +99,7 @@ public class SwerveSubsystem extends SubsystemBase {
         ShuffleboardLayout backRightModuleContainer = tab.getLayout("Back Right Module", BuiltInLayouts.kList)
             .withPosition(7, 0).withSize(2, 3);
         moduleAngleEntries[3] = backRightModuleContainer.add("Angle", 0.0).getEntry();
-        */
+*/
     }
 
     public void zeroHeading() {
@@ -108,6 +121,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public void resetOdometry(Pose2d pose) {
         odometer.resetPosition(pose, getRotation2d());
     }
+    
 
     @Override
     public void periodic() {
@@ -115,6 +129,12 @@ public class SwerveSubsystem extends SubsystemBase {
                 backRight.getState());
         SmartDashboard.putNumber("Robot Heading", getHeading());
         SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
+        
+        var pose = getPose();
+        //poseXEntry.setDouble(pose.getX());
+        //poseYEntry.setDouble(pose.getX());
+        //poseAngleEntry.setDouble(Math.toDegrees(module.getCurrentAngle()));
+
     }
 
     public void stopModules() {

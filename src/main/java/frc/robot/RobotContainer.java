@@ -21,11 +21,19 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 
+import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.*;
+import frc.robot.commands.*;
+
+
+
 public class RobotContainer {
 
     private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
     private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
+    private XboxController manipulatorController = new XboxController(OIConstants.kManipulatorControllerPort);
+
 
     public RobotContainer() {
         swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
@@ -40,6 +48,8 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         new JoystickButton(driverJoytick, 2).whenPressed(() -> swerveSubsystem.zeroHeading());
+
+        //manipulatorController.getXButton().toggleWhenActive(new IntakeIn());
     }
 
     public Command getAutonomousCommand() {

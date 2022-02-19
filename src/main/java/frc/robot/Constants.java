@@ -60,19 +60,22 @@ public final class Constants {
         public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
         public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -Math.toRadians(42);
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -Math.toRadians(42 + 180);
         //-0.254;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -Math.toRadians(336.3 + 180);
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -Math.toRadians(336.3 + 180 + 10);
         //-1.252;
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -Math.toRadians(169.5 + 180);
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -Math.toRadians(169.5);
         //-1.816;
         public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -Math.toRadians(136.8 + 180 + 180);
         //-4.811;
 
+        //HOW FAST ROBOT TRAVELS (DEFAULT 5)
         public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
+
+        //HOW FAST ROBOT SPINS (DEFAULT 2 * 2 * Math.PI)
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
-        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4;
+        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 2;
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = //
                 kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
@@ -97,6 +100,7 @@ public final class Constants {
 
     public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
+        public static final int kManipulatorControllerPort = 1;
 
         public static final int kDriverYAxis = 1;
         public static final int kDriverXAxis = 0;

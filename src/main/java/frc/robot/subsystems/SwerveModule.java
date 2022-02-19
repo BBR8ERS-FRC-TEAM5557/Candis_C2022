@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
 
+
+
 public class SwerveModule {
 
     private final CANSparkMax driveMotor;
@@ -51,6 +53,7 @@ public class SwerveModule {
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
 
         resetEncoders();
+        SmartDashboard.putNumber("swerve angle lawl", getAbsoluteEncoderRad());
     }
 
     public double getDrivePosition() {
@@ -83,6 +86,7 @@ public class SwerveModule {
 
     public SwerveModuleState getState() {
         return new SwerveModuleState(getDriveVelocity(), new Rotation2d(getTurningPosition()));
+
     }
 
     public void setDesiredState(SwerveModuleState state) {
