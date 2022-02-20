@@ -14,12 +14,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.XBoxConstants;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.SwerveSubsystem;
+
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
@@ -32,7 +35,7 @@ public class RobotContainer {
     private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
     private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
-    private XboxController manipulatorController = new XboxController(OIConstants.kManipulatorControllerPort);
+    private final XboxController manipulatorController = new XboxController(OIConstants.kManipulatorControllerPort);
 
 
     public RobotContainer() {
@@ -49,7 +52,12 @@ public class RobotContainer {
     private void configureButtonBindings() {
         new JoystickButton(driverJoytick, 2).whenPressed(() -> swerveSubsystem.zeroHeading());
 
-        //manipulatorController.getXButton().toggleWhenActive(new IntakeIn());
+        final JoystickButton A_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.aButton);
+        final JoystickButton B_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.bButton);
+        
+        A_BUTTON.toggleWhenPressed(new IntakeIn());
+        B_BUTTON.toggleWhenPressed(new IntakeOut());
+
     }
 
     public Command getAutonomousCommand() {

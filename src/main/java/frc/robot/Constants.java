@@ -69,15 +69,19 @@ public final class Constants {
         public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -Math.toRadians(136.8 + 180 + 180);
         //-4.811;
 
-        //HOW FAST ROBOT TRAVELS (DEFAULT 5)
-        public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
+        //CHECK MAX SPEED ROBOT TRAVELS IN NORMALIZE FUNCTION (DEFAULT - 5)
+        public static final double kPhysicalMaxSpeedMetersPerSecond = 10;
 
-        //HOW FAST ROBOT SPINS (DEFAULT 2 * 2 * Math.PI)
+        //CHECK MAX SPEED ROBOT SPIINS IN NORMALIZE FUNCTION (DEFAULT - 2 * 2 * Math.PI)
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
+        //TRANSLATION SPEED IN TELOP (DEFAULT - kPhysicalMaxSpeedMetersPerSecond / 4)
         public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 2;
+
+        //ROTATION SPEED IN TELOP (DEFAULT - kPhysicalMaxAngularSpeedRadiansPerSecond / 4)
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = //
                 kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
+
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
     }
@@ -105,8 +109,26 @@ public final class Constants {
         public static final int kDriverYAxis = 1;
         public static final int kDriverXAxis = 0;
         public static final int kDriverRotAxis = 4;
+
+        //???????
         public static final int kDriverFieldOrientedButtonIdx = 1;
 
         public static final double kDeadband = 0.05;
     }
+
+    public static final class XBoxConstants {
+        public static final int aButton = 1;
+		public static final int bButton = 2;
+		public static final int xButton = 3;
+		public static final int yButton = 4;
+		public static final int leftBumperButton = 5;
+		public static final int rightBumperButton = 6;
+		public static final int backButton = 7;
+		public static final int startButton = 8;
+		public static final int leftStickButton = 9;
+		public static final int rightStickButton = 10;
+    }
+
+   
 }
+

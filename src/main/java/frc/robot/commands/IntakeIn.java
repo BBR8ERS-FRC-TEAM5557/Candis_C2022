@@ -20,7 +20,7 @@ public class IntakeIn extends CommandBase {
   @Override
   public void initialize() {
 
-    Robot.pneumaticSubsystem.extendIntake();
+    Robot.pneumaticSubsystem.retractIntake();
     
   }
 
