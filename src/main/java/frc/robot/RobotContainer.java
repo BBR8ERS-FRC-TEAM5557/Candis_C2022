@@ -26,6 +26,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
+import frc.robot.input.JoystickAxis;
 
 
 
@@ -57,14 +58,17 @@ public class RobotContainer {
         final JoystickButton Y_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.yButton);
         final JoystickButton LEFT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.leftBumperButton);
         final JoystickButton RIGHT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.rightBumperButton);
-
+        final JoystickButton START_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.startButton);
+        final JoystickButton BACK_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.backButton);
         
-        RIGHT_BUMPER_BUTTON.whenPressed(new IntakeInCmd());
-        LEFT_BUMPER_BUTTON.whenPressed(new IntakeOutCmd());
+        BACK_BUTTON.whenPressed(new IntakeInCmd());
+        START_BUTTON.whenPressed(new IntakeOutCmd());
         X_BUTTON.whileHeld(new FullIntakeInCmd());
         A_BUTTON.whileHeld(new FullFeedLaunchCmd());
         Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
         B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
+        RIGHT_BUMPER_BUTTON.whileHeld(new ClimbUpCmd());
+        LEFT_BUMPER_BUTTON.whileHeld(new ClimbDownCmd());
 
     }
 
