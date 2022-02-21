@@ -50,8 +50,13 @@ public class RobotContainer {
     }
 
     private void configureButtonBindings() {
+        //DRIVER BUTTONS
         new JoystickButton(driverJoytick, 2).whenPressed(() -> swerveSubsystem.zeroHeading());
+        final JoystickButton DRIVER_RIGHT_BUMPER_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.rightBumperButton);
 
+        DRIVER_RIGHT_BUMPER_BUTTON.whileHeld(new LaunchFromDistanceCmd());
+
+        //MANIPULATOR BUTTONS
         final JoystickButton A_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.aButton);
         final JoystickButton B_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.bButton);
         final JoystickButton X_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.xButton);

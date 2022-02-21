@@ -43,7 +43,12 @@ public class LaunchSubsystem extends SubsystemBase {
     rightLaunchMotor.set(-0.3);
   }
 
-  public void stopLauch() {
+  public void launch(double speed) {
+    leftLaunchMotor.set(speed);
+    rightLaunchMotor.set(-speed);
+  }
+
+  public void stopLaunch() {
     leftLaunchMotor.set(0);
     rightLaunchMotor.set(0);
   }
