@@ -20,7 +20,6 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Constants.XBoxConstants;
-import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 
 
@@ -54,9 +53,18 @@ public class RobotContainer {
 
         final JoystickButton A_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.aButton);
         final JoystickButton B_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.bButton);
+        final JoystickButton X_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.xButton);
+        final JoystickButton Y_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.yButton);
+        final JoystickButton LEFT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.leftBumperButton);
+        final JoystickButton RIGHT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.rightBumperButton);
+
         
-        A_BUTTON.toggleWhenPressed(new IntakeIn());
-        B_BUTTON.toggleWhenPressed(new IntakeOut());
+        RIGHT_BUMPER_BUTTON.whenPressed(new IntakeInCmd());
+        LEFT_BUMPER_BUTTON.whenPressed(new IntakeOutCmd());
+        X_BUTTON.whileHeld(new FullIntakeInCmd());
+        A_BUTTON.whileHeld(new FullFeedLaunchCmd());
+        Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
+        B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
 
     }
 

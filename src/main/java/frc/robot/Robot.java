@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
 
     private RobotContainer m_robotContainer;
 
-    public static PneumaticSubsystem pneumaticSubsystem;
+    //public static PneumaticSubsystem pneumaticSubsystem;
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
         // and put our
         // autonomous chooser on the dashboard.
         m_robotContainer = new RobotContainer();
-        pneumaticSubsystem = new PneumaticSubsystem();
+        //pneumaticSubsystem = new PneumaticSubsystem();
     }
 
     /**

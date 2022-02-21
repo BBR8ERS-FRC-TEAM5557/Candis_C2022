@@ -129,6 +129,18 @@ public final class Constants {
 		public static final int rightStickButton = 10;
     }
 
+    public static final class MotorControllers {
+        public static final int CLIMB_MOTOR_CONTROLLER_1 = 9;
+		public static final int CLIMB_MOTOR_CONTROLLER_2 = 10;
+		public static final int CLIMB_MOTOR_CONTROLLER_3 = 11;
+		public static final int CLIMB_MOTOR_CONTROLLER_4 = 12;
+		public static final int INTAKE_MOTOR_CONTROLLER = 13;
+		public static final int STORE_MOTOR_CONTROLLER = 14;
+		public static final int UPLIFT_MOTOR_CONTROLLER = 15;
+		public static final int LEFT_LAUNCH_MOTOR_CONTROLLER = 16;
+		public static final int RIGHT_LAUNCH_MOTOR_CONTROLLER = 17;
+    }
+
    
 }
 
