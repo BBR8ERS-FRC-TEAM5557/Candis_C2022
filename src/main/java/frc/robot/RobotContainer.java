@@ -77,7 +77,7 @@ public class RobotContainer {
 
     }
 
-    public Command getAutonomousCommand() {
+    public Command getAutonomousCommand1() {
         // 1. Create trajectory settings
         TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
                 AutoConstants.kMaxSpeedMetersPerSecond,
@@ -88,9 +88,9 @@ public class RobotContainer {
         Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
                 new Pose2d(0, 0, new Rotation2d(0)),
                 List.of(
-                        new Translation2d(.2, 0),
-                        new Translation2d(.2, -.2)),
-                new Pose2d(.4, -.2, Rotation2d.fromDegrees(180)),
+                        new Translation2d(1, 0),
+                        new Translation2d(1, -1)),
+                new Pose2d(2, -1, Rotation2d.fromDegrees(180)),
                 trajectoryConfig);
 
         // 3. Define PID controllers for tracking trajectory
@@ -117,4 +117,5 @@ public class RobotContainer {
                 swerveControllerCommand,
                 new InstantCommand(() -> swerveSubsystem.stopModules()));
     }
+
 }
