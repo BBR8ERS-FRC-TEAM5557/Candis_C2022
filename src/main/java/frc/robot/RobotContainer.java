@@ -28,6 +28,7 @@ import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import frc.robot.input.JoystickAxis;
 
+import frc.robot.Robot;
 
 
 public class RobotContainer {
@@ -54,7 +55,6 @@ public class RobotContainer {
         new JoystickButton(driverJoytick, 2).whenPressed(() -> swerveSubsystem.zeroHeading());
         final JoystickButton DRIVER_RIGHT_BUMPER_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.rightBumperButton);
 
-        DRIVER_RIGHT_BUMPER_BUTTON.whileHeld(new LaunchFromDistanceCmd());
 
         //MANIPULATOR BUTTONS
         final JoystickButton A_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.aButton);
@@ -66,14 +66,14 @@ public class RobotContainer {
         final JoystickButton START_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.startButton);
         final JoystickButton BACK_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.backButton);
         
-        BACK_BUTTON.whenPressed(new IntakeInCmd());
-        START_BUTTON.whenPressed(new IntakeOutCmd());
-        X_BUTTON.whileHeld(new FullIntakeInCmd());
-        A_BUTTON.whileHeld(new FullFeedLaunchCmd());
-        Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
-        B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
-        RIGHT_BUMPER_BUTTON.whileHeld(new ClimbUpCmd());
-        LEFT_BUMPER_BUTTON.whileHeld(new ClimbDownCmd());
+        //BACK_BUTTON.whenPressed(new IntakeInCmd());
+        //START_BUTTON.whenPressed(new IntakeOutCmd());
+        //X_BUTTON.whileHeld(new FullIntakeInCmd());
+        //A_BUTTON.whileHeld(new FullFeedLaunchCmd());
+        //Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
+        //B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
+        //RIGHT_BUMPER_BUTTON.whileHeld(new ClimbUpCmd());
+        //LEFT_BUMPER_BUTTON.whileHeld(new ClimbDownCmd());
 
     }
 
