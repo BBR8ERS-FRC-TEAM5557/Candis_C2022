@@ -21,6 +21,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Constants.XBoxConstants;
 import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.PneumaticSubsystem;
 
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -55,7 +56,6 @@ public class RobotContainer {
         new JoystickButton(driverJoytick, 2).whenPressed(() -> swerveSubsystem.zeroHeading());
         final JoystickButton DRIVER_RIGHT_BUMPER_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.rightBumperButton);
 
-
         //MANIPULATOR BUTTONS
         final JoystickButton A_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.aButton);
         final JoystickButton B_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.bButton);
@@ -63,11 +63,11 @@ public class RobotContainer {
         final JoystickButton Y_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.yButton);
         final JoystickButton LEFT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.leftBumperButton);
         final JoystickButton RIGHT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.rightBumperButton);
-        final JoystickButton START_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.startButton);
-        final JoystickButton BACK_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.backButton);
+        final JoystickButton START_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.startButton);
+        final JoystickButton BACK_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.backButton);
         
-        //BACK_BUTTON.whenPressed(new IntakeInCmd());
-        //START_BUTTON.whenPressed(new IntakeOutCmd());
+        BACK_BUTTON.whenPressed(new IntakeInCmd());
+        START_BUTTON.whenPressed(new IntakeOutCmd());
         //X_BUTTON.whileHeld(new FullIntakeInCmd());
         //A_BUTTON.whileHeld(new FullFeedLaunchCmd());
         //Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
