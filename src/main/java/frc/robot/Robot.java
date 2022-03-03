@@ -171,7 +171,7 @@ public class Robot extends TimedRobot {
         ShuffleboardTab tab = Shuffleboard.getTab("Autonomous Options");
         autonomousModes = new SendableChooser<Command>();
         autonomousModes.setDefaultOption("Test Auto",
-            m_robotContainer.getAutonomousCommand1()
+            m_robotContainer.getAutonomousCommand2()
             );
         tab.add("Autonomous Mode", autonomousModes).withWidget(BuiltInWidgets.kComboBoxChooser);
     }

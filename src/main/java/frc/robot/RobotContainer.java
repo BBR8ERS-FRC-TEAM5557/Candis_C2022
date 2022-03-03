@@ -130,7 +130,7 @@ public class RobotContainer {
         Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
                 new Pose2d(0, 0, new Rotation2d(0)),
                 List.of(
-                        new Translation2d(Units.feetToMeters(0), Units.feetToMeters(3))
+                        new Translation2d(0, 1)
                         //new Translation2d(1, -1)
                         ),
                 new Pose2d(0, 1, Rotation2d.fromDegrees(180)),
