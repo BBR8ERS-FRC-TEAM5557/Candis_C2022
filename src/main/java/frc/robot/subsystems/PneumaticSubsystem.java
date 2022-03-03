@@ -17,10 +17,7 @@ public class PneumaticSubsystem extends SubsystemBase {
   public static PneumaticSubsystem instance = null;
 
   public final Solenoid leftIntake;
-  //public final Compressor compressor;
   public PneumaticHub pneumaticHub;
-
-  boolean pressureSwitch;
 
   public static PneumaticSubsystem getInstance() {
     if (instance == null) {
@@ -31,23 +28,8 @@ public class PneumaticSubsystem extends SubsystemBase {
 
   public PneumaticSubsystem() {
 	  pneumaticHub = new PneumaticHub(1);
-    leftIntake = new Solenoid(PneumaticsModuleType.REVPH, 8);
-    //compressor = new Compressor(PneumaticsModuleType.REVPH);
-        
+    leftIntake = new Solenoid(PneumaticsModuleType.REVPH, 8);        
 	}
-/** 
-  //@Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    pressureSwitch = pneumaticHub.getPressureSwitch();
-    if (pressureSwitch) {
-      compressor.disable();
-    }
-    else {
-      compressor.enableDigital();
-    }
-  }
-*/
 
   public void extendIntake() {
     leftIntake.set(false);
@@ -56,14 +38,5 @@ public class PneumaticSubsystem extends SubsystemBase {
   public void retractIntake() {
     leftIntake.set(true);
   }
-
-  /** 
-  public void CompressorOn(){
-    pneumaticHub.enableCompressorAnalog(50,60);
-  }
-  public void CompressorOff(){
-    pneumaticHub.disableCompressor();
-  }
-  */
 
 }
