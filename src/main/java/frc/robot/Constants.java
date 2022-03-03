@@ -71,14 +71,14 @@ public final class Constants {
         //-4.811;
          */
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -3.87463 - 0.251465;
-        //-0.254;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -2.9024825 - 4.129;
-        //-1.252;
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -2.9583331 - 4.34375;
-        //-1.816;
-        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -2.3876104-.38699;
-        //-4.811;
+        //ANALOG INPUT 1
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -3.87463 - 0.251465 - (1.710205-1.96411);
+        //ANALOG INPUT 2
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -2.9024825 - 4.129 - (4.354248-4.195556);
+        //ANALOG INPUT 0
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -2.9583331 - 4.34375 + .33683 - (1.922607-1.989746);
+        //ANALOG INPUT 3
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -2.3876104 - .38699 + .2985 - (0.52124-0.526123);
 
         //CHECK MAX SPEED ROBOT TRAVELS IN NORMALIZE FUNCTION (DEFAULT - 5)
         public static final double kPhysicalMaxSpeedMetersPerSecond = 10;
