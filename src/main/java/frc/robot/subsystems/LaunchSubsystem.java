@@ -27,9 +27,9 @@ public class LaunchSubsystem extends SubsystemBase {
   private CANSparkMax leftLaunchMotor, rightLaunchMotor, upliftMotor;
 
   public LaunchSubsystem() {
-		this.leftLaunchMotor = new CANSparkMax(MotorControllers.LEFT_LAUNCH_MOTOR_CONTROLLER, MotorType.kBrushless);
-    this.rightLaunchMotor = new CANSparkMax(MotorControllers.RIGHT_LAUNCH_MOTOR_CONTROLLER, MotorType.kBrushless);
-    this.upliftMotor = new CANSparkMax(MotorControllers.UPLIFT_MOTOR_CONTROLLER, MotorType.kBrushless);
+		//this.leftLaunchMotor = new CANSparkMax(MotorControllers.LEFT_LAUNCH_MOTOR_CONTROLLER, MotorType.kBrushless);
+    //this.rightLaunchMotor = new CANSparkMax(MotorControllers.RIGHT_LAUNCH_MOTOR_CONTROLLER, MotorType.kBrushless);
+    //this.upliftMotor = new CANSparkMax(MotorControllers.UPLIFT_MOTOR_CONTROLLER, MotorType.kBrushless);
         
 	}
 

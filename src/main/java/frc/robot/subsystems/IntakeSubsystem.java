@@ -27,8 +27,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private CANSparkMax intakeMotor, storeMotor;
 
   public IntakeSubsystem() {
-		this.intakeMotor = new CANSparkMax(MotorControllers.INTAKE_MOTOR_CONTROLLER, MotorType.kBrushless);
-    this.storeMotor = new CANSparkMax(MotorControllers.STORE_MOTOR_CONTROLLER, MotorType.kBrushless);
+		//this.intakeMotor = new CANSparkMax(MotorControllers.INTAKE_MOTOR_CONTROLLER, MotorType.kBrushless);
+    //this.storeMotor = new CANSparkMax(MotorControllers.STORE_MOTOR_CONTROLLER, MotorType.kBrushless);
         
 	}
 

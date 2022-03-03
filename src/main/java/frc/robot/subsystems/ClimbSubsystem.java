@@ -27,10 +27,10 @@ public class ClimbSubsystem extends SubsystemBase {
   private CANSparkMax rightClimbMotor1, rightClimbMotor2, leftClimbMotor1, leftClimbMotor2;
 
   public ClimbSubsystem() {
-		this.rightClimbMotor1 = new CANSparkMax(MotorControllers.RIGHT_CLIMB_MOTOR_CONTROLLER_1, MotorType.kBrushless);
-    this.rightClimbMotor2 = new CANSparkMax(MotorControllers.RIGHT_CLIMB_MOTOR_CONTROLLER_2, MotorType.kBrushless);
-    this.leftClimbMotor1 = new CANSparkMax(MotorControllers.LEFT_CLIMB_MOTOR_CONTROLLER_1, MotorType.kBrushless);
-    this.leftClimbMotor2 = new CANSparkMax(MotorControllers.LEFT_CLIMB_MOTOR_CONTROLLER_2, MotorType.kBrushless);
+		//this.rightClimbMotor1 = new CANSparkMax(MotorControllers.RIGHT_CLIMB_MOTOR_CONTROLLER_1, MotorType.kBrushless);
+    //this.rightClimbMotor2 = new CANSparkMax(MotorControllers.RIGHT_CLIMB_MOTOR_CONTROLLER_2, MotorType.kBrushless);
+    //this.leftClimbMotor1 = new CANSparkMax(MotorControllers.LEFT_CLIMB_MOTOR_CONTROLLER_1, MotorType.kBrushless);
+    //this.leftClimbMotor2 = new CANSparkMax(MotorControllers.LEFT_CLIMB_MOTOR_CONTROLLER_2, MotorType.kBrushless);
 	}
 
   public void climbUp() {

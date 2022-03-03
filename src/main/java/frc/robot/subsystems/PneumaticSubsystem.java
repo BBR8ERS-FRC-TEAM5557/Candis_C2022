@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.PneumaticHub;
+
+
 
 /**
  * Add your docs here.
@@ -11,9 +14,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class PneumaticSubsystem extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  static PneumaticSubsystem instance;
+  public static PneumaticSubsystem instance = null;
 
-  public Solenoid leftIntake, rightIntake;
+  public final Solenoid leftIntake;
+  //public final Compressor compressor;
+  public PneumaticHub pneumaticHub;
+
+  boolean pressureSwitch;
 
   public static PneumaticSubsystem getInstance() {
     if (instance == null) {
@@ -23,9 +30,24 @@ public class PneumaticSubsystem extends SubsystemBase {
   }
 
   public PneumaticSubsystem() {
-		Solenoid leftIntake = new Solenoid(PneumaticsModuleType.REVPH, 0);
+	  pneumaticHub = new PneumaticHub(1);
+    leftIntake = new Solenoid(PneumaticsModuleType.REVPH, 8);
+    //compressor = new Compressor(PneumaticsModuleType.REVPH);
         
 	}
+/** 
+  //@Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    pressureSwitch = pneumaticHub.getPressureSwitch();
+    if (pressureSwitch) {
+      compressor.disable();
+    }
+    else {
+      compressor.enableDigital();
+    }
+  }
+*/
 
   public void extendIntake() {
     leftIntake.set(false);
@@ -34,4 +56,14 @@ public class PneumaticSubsystem extends SubsystemBase {
   public void retractIntake() {
     leftIntake.set(true);
   }
+
+  /** 
+  public void CompressorOn(){
+    pneumaticHub.enableCompressorAnalog(50,60);
+  }
+  public void CompressorOff(){
+    pneumaticHub.disableCompressor();
+  }
+  */
+
 }

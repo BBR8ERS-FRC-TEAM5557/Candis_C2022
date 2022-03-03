@@ -68,12 +68,12 @@ public class RobotContainer {
         
         BACK_BUTTON.whenPressed(new IntakeInCmd());
         START_BUTTON.whenPressed(new IntakeOutCmd());
-        X_BUTTON.whileHeld(new FullIntakeInCmd());
-        A_BUTTON.whileHeld(new FullFeedLaunchCmd());
-        Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
-        B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
-        RIGHT_BUMPER_BUTTON.whileHeld(new ClimbUpCmd());
-        LEFT_BUMPER_BUTTON.whileHeld(new ClimbDownCmd());
+        //X_BUTTON.whileHeld(new FullIntakeInCmd());
+        //A_BUTTON.whileHeld(new FullFeedLaunchCmd());
+        //Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
+        //B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
+        //RIGHT_BUMPER_BUTTON.whileHeld(new ClimbUpCmd());
+        //LEFT_BUMPER_BUTTON.whileHeld(new ClimbDownCmd());
 
     }
 
