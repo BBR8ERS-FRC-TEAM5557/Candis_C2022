@@ -12,6 +12,29 @@ import frc.robot.subsystems.PneumaticSubsystem;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
+
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +53,8 @@ public class Robot extends TimedRobot {
 
     private final Compressor m_compressor = new Compressor(PneumaticsModuleType.REVPH);
 
+    SendableChooser<Command> autonomousModes;
+    Command autonomousCommand;
     /**
      * This function is run when the robot is first started up and should be used
      * for any
@@ -42,6 +67,8 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
 
         m_robotContainer = new RobotContainer();
+        
+        this.setupAutonomousOptions();
     }
 
     /**
@@ -84,12 +111,20 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        m_autonomousCommand = m_robotContainer.getAutonomousCommand1();
+        //m_autonomousCommand = m_robotContainer.getAutonomousCommand1();
+
+        autonomousCommand = autonomousModes.getSelected();
+        if (autonomousCommand != null) {
+            autonomousCommand.schedule();
+        }
+        //autonomousCommand.schedule();
 
         // schedule the autonomous command (example)
+        /** 
         if (m_autonomousCommand != null) {
             m_autonomousCommand.schedule();
         }
+        */
     }
 
     /** This function is called periodically during autonomous. */
@@ -103,9 +138,15 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
+        /**
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
+        */
+        if (autonomousCommand != null) {
+            autonomousCommand.cancel();
+        }
+
         m_compressor.enableAnalog(50, 60);
     }
 
@@ -124,4 +165,14 @@ public class Robot extends TimedRobot {
     @Override
     public void testPeriodic() {
     }
+
+    private void setupAutonomousOptions() {
+        ShuffleboardTab tab = Shuffleboard.getTab("Autonomous Options");
+        autonomousModes = new SendableChooser<Command>();
+        autonomousModes.setDefaultOption("Test Auto",
+            m_robotContainer.getAutonomousCommand2()
+            );
+        tab.add("Autonomous Mode", autonomousModes).withWidget(BuiltInWidgets.kComboBoxChooser);
+    }
+
 }

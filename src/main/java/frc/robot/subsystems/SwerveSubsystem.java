@@ -58,14 +58,6 @@ public class SwerveSubsystem extends SubsystemBase {
     private final AHRS gyro = new AHRS(SPI.Port.kMXP);
     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
             new Rotation2d(0));
-/** 
-    private SwerveModule[] modules = { frontLeft, frontRight, backLeft, backRight };
-
-    private NetworkTableEntry[] moduleAngleEntries = new NetworkTableEntry[modules.length];
-    private NetworkTableEntry poseXEntry;
-    private NetworkTableEntry poseYEntry;
-    private NetworkTableEntry poseAngleEntry;
-*/
 
     public SwerveSubsystem() {
         new Thread(() -> {
@@ -78,28 +70,6 @@ public class SwerveSubsystem extends SubsystemBase {
         
         
         //SmartDashboard.putNumber("swerve angle lawl", modules[0].getAbsoluteEncoderRad());
-/**
-        ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
-        poseXEntry = tab.add("Pose X", 0.0).withPosition(0, 0).withSize(1, 1).getEntry();
-        poseYEntry = tab.add("Pose Y", 0.0).withPosition(0, 1).withSize(1, 1).getEntry();
-        poseAngleEntry = tab.add("Pose Angle", 0.0).withPosition(0, 2).withSize(1, 1).getEntry();
-
-        ShuffleboardLayout frontLeftModuleContainer = tab.getLayout("Front Left Module", BuiltInLayouts.kList)
-            .withPosition(1, 0).withSize(2, 3);
-        moduleAngleEntries[0] = frontLeftModuleContainer.add("Angle", 0.0).getEntry();
-
-        ShuffleboardLayout frontRightModuleContainer = tab.getLayout("Front Right Module", BuiltInLayouts.kList)
-            .withPosition(3, 0).withSize(2, 3);
-        moduleAngleEntries[1] = frontRightModuleContainer.add("Angle", 0.0).getEntry();
-
-        ShuffleboardLayout backLeftModuleContainer = tab.getLayout("Back Left Module", BuiltInLayouts.kList)
-            .withPosition(5, 0).withSize(2, 3);
-        moduleAngleEntries[2] = backLeftModuleContainer.add("Angle", 0.0).getEntry();
-
-        ShuffleboardLayout backRightModuleContainer = tab.getLayout("Back Right Module", BuiltInLayouts.kList)
-            .withPosition(7, 0).withSize(2, 3);
-        moduleAngleEntries[3] = backRightModuleContainer.add("Angle", 0.0).getEntry();
-*/
     }
 
     public void zeroHeading() {

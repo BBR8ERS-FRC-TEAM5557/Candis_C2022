@@ -45,10 +45,10 @@ public final class Constants {
         public static final boolean kFrontRightTurningEncoderReversed = true;
         public static final boolean kBackRightTurningEncoderReversed = true;
 
-        public static final boolean kFrontLeftDriveEncoderReversed = true;
-        public static final boolean kBackLeftDriveEncoderReversed = true;
-        public static final boolean kFrontRightDriveEncoderReversed = false;
-        public static final boolean kBackRightDriveEncoderReversed = false;
+        public static final boolean kFrontLeftDriveEncoderReversed = false;
+        public static final boolean kBackLeftDriveEncoderReversed = false;
+        public static final boolean kFrontRightDriveEncoderReversed = true;
+        public static final boolean kBackRightDriveEncoderReversed = true;
 
         public static final int kFrontLeftDriveAbsoluteEncoderPort = 1;
         public static final int kBackLeftDriveAbsoluteEncoderPort = 2;
@@ -71,14 +71,14 @@ public final class Constants {
         //-4.811;
          */
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -3.87463 - 0.251465;
-        //-0.254;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -2.9024825 - 4.129;
-        //-1.252;
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -2.9583331 - 4.34375;
-        //-1.816;
-        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -2.3876104-.38699;
-        //-4.811;
+        //ANALOG INPUT 1
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -3.87463 - 0.251465 - (1.710205-1.96411);
+        //ANALOG INPUT 2
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -2.9024825 - 4.129 + 3.14 - (4.354248-4.195556);
+        //ANALOG INPUT 0
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -2.9583331 - 4.34375 + .33683 - (1.922607-1.989746);
+        //ANALOG INPUT 3
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -2.3876104 - .38699 + .2985 - (0.52124-0.526123);
 
         //CHECK MAX SPEED ROBOT TRAVELS IN NORMALIZE FUNCTION (DEFAULT - 5)
         public static final double kPhysicalMaxSpeedMetersPerSecond = 10;
@@ -114,8 +114,8 @@ public final class Constants {
     }
 
     public static final class OIConstants {
-        public static final int kDriverControllerPort = 1;
-        public static final int kManipulatorControllerPort = 0;
+        public static final int kDriverControllerPort = 0;
+        public static final int kManipulatorControllerPort = 1;
 
         public static final int kDriverYAxis = 1;
         public static final int kDriverXAxis = 0;
