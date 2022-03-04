@@ -19,6 +19,16 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 
 
 public class SwerveSubsystem extends SubsystemBase {
+
+    public static SwerveSubsystem instance = null;
+    
+    public static SwerveSubsystem getInstance() {
+        if (instance == null) {
+          instance = new SwerveSubsystem();
+        }
+        return instance;
+      }
+
     private final SwerveModule frontLeft = new SwerveModule(
             DriveConstants.kFrontLeftDriveMotorPort,
             DriveConstants.kFrontLeftTurningMotorPort,

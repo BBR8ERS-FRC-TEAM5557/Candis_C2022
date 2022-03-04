@@ -74,7 +74,11 @@ public final class Constants {
         //ANALOG INPUT 1
         public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -3.87463 - 0.251465 - (1.710205-1.96411);
         //ANALOG INPUT 2
+<<<<<<< HEAD
         public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -2.9024825 - 4.129 + 3.14 - (4.354248-4.195556);
+=======
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -2.9024825 - 4.129 - (4.354248-4.195556);
+>>>>>>> f2eb88c4574c61dea6c98eb3b87004d10412187b
         //ANALOG INPUT 0
         public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -2.9583331 - 4.34375 + .33683 - (1.922607-1.989746);
         //ANALOG INPUT 3
