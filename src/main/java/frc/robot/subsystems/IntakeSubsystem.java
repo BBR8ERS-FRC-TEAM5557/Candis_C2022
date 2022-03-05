@@ -48,4 +48,8 @@ public class IntakeSubsystem extends SubsystemBase {
     storeMotor.set(0.5);
   }
 
+  public void stopSpinStore(){
+    storeMotor.set(0);
+  }
+
 }

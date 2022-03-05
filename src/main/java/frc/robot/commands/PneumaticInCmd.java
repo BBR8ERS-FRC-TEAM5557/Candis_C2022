@@ -6,16 +6,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj.Solenoid;
+import frc.robot.subsystems.PneumaticSubsystem;
+import frc.robot.Robot;
 
-public class IntakeInCmd extends CommandBase {
+public class PneumaticInCmd extends CommandBase {
   /** Creates a new IntakeIn. */
-  IntakeSubsystem intake;
+  PneumaticSubsystem pneumatics;
 
-  public IntakeInCmd() {
+  public PneumaticInCmd() {
     // Use addRequirements() here to declare subsystem dependencies.
-    intake = IntakeSubsystem.getInstance();
-    addRequirements(intake);
+    pneumatics = PneumaticSubsystem.getInstance();
+    addRequirements(pneumatics);
   }
 
   // Called when the command is initially scheduled.
@@ -26,14 +28,12 @@ public class IntakeInCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.spinIntakeIn();
+    pneumatics.retractIntake();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    intake.stopSpinIntake();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

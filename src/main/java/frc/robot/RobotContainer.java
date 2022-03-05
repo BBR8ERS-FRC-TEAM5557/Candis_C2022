@@ -54,27 +54,30 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         //DRIVER BUTTONS
+        final JoystickButton DRIVER_RIGHT_BUMPER_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.rightBumperButton);
+        final JoystickButton DRIVER_LEFT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.leftBumperButton);
+
+        DRIVER_LEFT_BUMPER_BUTTON.whenPressed(new PneumaticInCmd());
+        DRIVER_RIGHT_BUMPER_BUTTON.whenPressed(new PneumaticOutCmd());
         new JoystickButton(driverJoytick, OIConstants.kDriverFieldOrientedButtonIdx).whenPressed(() -> swerveSubsystem.zeroHeading());
-        //final JoystickButton DRIVER_RIGHT_BUMPER_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.rightBumperButton);
+        
 
         //MANIPULATOR BUTTONS
-        //final JoystickButton A_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.aButton);
-        //final JoystickButton B_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.bButton);
-        //final JoystickButton X_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.xButton);
-        //final JoystickButton Y_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.yButton);
-        //final JoystickButton LEFT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.leftBumperButton);
-        //final JoystickButton RIGHT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.rightBumperButton);
-        //final JoystickButton START_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.startButton);
-        //final JoystickButton BACK_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.backButton);
-        
-        //BACK_BUTTON.whenPressed(new IntakeInCmd());
-        //START_BUTTON.whenPressed(new IntakeOutCmd());
-        //X_BUTTON.whileHeld(new FullIntakeInCmd());
-        //A_BUTTON.whileHeld(new FullFeedLaunchCmd());
-        //Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
-        //B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
-        //RIGHT_BUMPER_BUTTON.whileHeld(new ClimbUpCmd());
-        //LEFT_BUMPER_BUTTON.whileHeld(new ClimbDownCmd());
+        //final JoystickButton MANIPULATOR_A_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.aButton);
+        final JoystickButton MANIPULATOR_B_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.bButton);
+        //final JoystickButton MANIPULATOR_X_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.xButton);
+        final JoystickButton MANIPULATOR_Y_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.yButton);
+        final JoystickButton MANIPULATOR_LEFT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.leftBumperButton);
+        final JoystickButton MANIPULATOR_RIGHT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.rightBumperButton);
+        //final JoystickButton MANIPULATOR_START_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.startButton);
+        //final JoystickButton MANIPULATOR_BACK_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.backButton);
+
+        //MANIPULATOR_X_BUTTON.whileHeld(new FullIntakeInCmd());
+        //MANIPULATOR_A_BUTTON.whileHeld(new FullFeedLaunchCmd());
+        MANIPULATOR_Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
+        MANIPULATOR_B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
+        MANIPULATOR_RIGHT_BUMPER_BUTTON.whileHeld(new ClimbUpCmd());
+        MANIPULATOR_LEFT_BUMPER_BUTTON.whileHeld(new ClimbDownCmd());
 
     }
 
