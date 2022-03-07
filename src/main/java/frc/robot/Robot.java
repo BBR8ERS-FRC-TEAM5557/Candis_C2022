@@ -223,7 +223,7 @@ public class Robot extends TimedRobot {
                 new LaunchUpperForTimeCmd()
                 ),
             new ParallelRaceGroup(
-                m_robotContainer.getAutonomousCommand3(),
+                m_robotContainer.getAutonomousCommand4(),
                 new FullIntakeForTimeCmd()
                 ),
             new ParallelCommandGroup(

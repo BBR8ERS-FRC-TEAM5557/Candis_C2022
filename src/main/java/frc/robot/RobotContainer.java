@@ -208,7 +208,7 @@ public class RobotContainer {
                 swerveControllerCommand,
                 new InstantCommand(() -> swerveSubsystem.stopModules()));
     }
-    /**
+    
     public Command getAutonomousCommand4() {
         String trajectoryJSON = "paths/TwoBallRed1.wpilib.json";
         Trajectory trajectory = new Trajectory();
@@ -244,6 +244,5 @@ public class RobotContainer {
                 swerveControllerCommand,
                 new InstantCommand(() -> swerveSubsystem.stopModules()));
     }
-     */
 
 }
