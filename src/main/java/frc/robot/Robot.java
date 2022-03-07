@@ -69,6 +69,7 @@ import frc.robot.subsystems.PneumaticSubsystem;
 
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 
@@ -84,6 +85,8 @@ import frc.robot.commands.*;
 public class Robot extends TimedRobot {
     
     private Command m_autonomousCommand;
+
+    private Limelight m_Limelight;
 
     private RobotContainer m_robotContainer;
 
@@ -106,6 +109,7 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
 
         m_robotContainer = new RobotContainer();
+        m_Limelight = new Limelight();
         
         this.setupAutonomousOptions();
 
@@ -189,11 +193,21 @@ public class Robot extends TimedRobot {
         }
 
         m_compressor.enableAnalog(50, 60);
+        //m_Limelight.enableLEDs();
     }
 
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
+
+        addPeriodic(() -> {
+            if((m_Limelight.getAngleX() > -20 && m_Limelight.getAngleX() < 20 && m_Limelight.hasTarget()
+            && m_Limelight.getAngleX() != 0)) {
+                m_robotContainer.driverJoytick.setRumble(RumbleType.kRightRumble, 1.0);
+            }else{
+                m_robotContainer.driverJoytick.setRumble(RumbleType.kRightRumble, 0);
+            };
+        }, 0.01, 0.005);
     }
 
     @Override

@@ -43,7 +43,7 @@ public class RobotContainer {
 
     final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
-    private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
+    public final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
     private final XboxController manipulatorController = new XboxController(OIConstants.kManipulatorControllerPort);
 
 
