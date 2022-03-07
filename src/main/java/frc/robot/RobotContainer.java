@@ -1,6 +1,11 @@
 package frc.robot;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -10,6 +15,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -35,7 +41,7 @@ import frc.robot.Robot;
 
 public class RobotContainer {
 
-    private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+    final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
     private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
     private final XboxController manipulatorController = new XboxController(OIConstants.kManipulatorControllerPort);
@@ -72,7 +78,7 @@ public class RobotContainer {
         //final JoystickButton MANIPULATOR_START_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.startButton);
         //final JoystickButton MANIPULATOR_BACK_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.backButton);
 
-        MANIPULATOR_X_BUTTON.whileHeld(new FullIntakeInCmd());
+        MANIPULATOR_X_BUTTON.whileHeld(new IntakeInCmd());
         MANIPULATOR_A_BUTTON.whileHeld(new FullFeedLaunchCmd());
         MANIPULATOR_Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
         MANIPULATOR_B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
@@ -90,11 +96,11 @@ public class RobotContainer {
 
         // 2. Generate trajectory
         Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-                new Pose2d(0, 0, new Rotation2d(0)),
+                new Pose2d(2, 0, new Rotation2d(0)),
                 List.of(
-                        new Translation2d(1, 0),
-                        new Translation2d(1, -1)),
-                new Pose2d(2, -1, Rotation2d.fromDegrees(180)),
+                        new Translation2d(0, 1),
+                        new Translation2d(0, 1)),
+                new Pose2d(2, 2, Rotation2d.fromDegrees(180)),
                 trajectoryConfig);
 
         // 3. Define PID controllers for tracking trajectory
@@ -130,12 +136,13 @@ public class RobotContainer {
                         .setKinematics(DriveConstants.kDriveKinematics);
 
         // 2. Generate trajectory
+        
         Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
                 new Pose2d(0, 0, new Rotation2d(0)),
                 List.of(
                         new Translation2d(1, 0),
-                        new Translation2d(1, -1)),
-                new Pose2d(2, -1, Rotation2d.fromDegrees(180)),
+                        new Translation2d(1, 0)),
+                new Pose2d(2, 0, new Rotation2d(0)),
                 trajectoryConfig);
 
         // 3. Define PID controllers for tracking trajectory
@@ -163,5 +170,40 @@ public class RobotContainer {
                 new InstantCommand(() -> swerveSubsystem.stopModules()));
     }
 
+    public Command getAutonomousCommand3() {
+        String trajectoryJSON = "paths/testpath.wpilib.json";
+        Trajectory trajectory = new Trajectory();
+        
+        try {
+                Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+                trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+             } catch (IOException ex) {
+                DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+             }
+
+        // 3. Define PID controllers for tracking trajectory
+        PIDController xController = new PIDController(AutoConstants.kPXController, 0, 0);
+        PIDController yController = new PIDController(AutoConstants.kPYController, 0, 0);
+        ProfiledPIDController thetaController = new ProfiledPIDController(
+                AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+        thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
+        // 4. Construct command to follow trajectory
+        SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
+                trajectory,
+                swerveSubsystem::getPose,
+                DriveConstants.kDriveKinematics,
+                xController,
+                yController,
+                thetaController,
+                swerveSubsystem::setModuleStates,
+                swerveSubsystem);
+
+        // 5. Add some init and wrap-up, and return everything
+        return new SequentialCommandGroup(
+                new InstantCommand(() -> swerveSubsystem.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))),
+                swerveControllerCommand,
+                new InstantCommand(() -> swerveSubsystem.stopModules()));
+    }
 
 }

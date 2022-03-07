@@ -27,6 +27,7 @@ public class IntakeInCmd extends CommandBase {
   @Override
   public void execute() {
     intake.spinIntakeIn();
+    intake.spinStore();
   }
 
   // Called once the command ends or is interrupted.

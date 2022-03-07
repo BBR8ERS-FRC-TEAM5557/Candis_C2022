@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeStoreCmd;
 import frc.robot.commands.IntakeStoreForTimeCmd;
-import frc.robot.commands.LaunchUpliftForTimeCmd;
 import frc.robot.commands.LaunchUpperForTimeCmd;
 import frc.robot.subsystems.PneumaticSubsystem;
 import edu.wpi.first.wpilibj.Compressor;
@@ -22,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -39,6 +39,41 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
+import java.io.IOException;
+import java.util.List;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.XBoxConstants;
+import frc.robot.subsystems.SwerveSubsystem;
+import team2910.lib.control.Path;
+import frc.robot.subsystems.PneumaticSubsystem;
+
+
+import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.*;
+import frc.robot.commands.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -61,6 +96,7 @@ public class Robot extends TimedRobot {
 
     SendableChooser<Command> autonomousModes;
     Command autonomousCommand;
+
     /**
      * This function is run when the robot is first started up and should be used
      * for any
@@ -75,6 +111,8 @@ public class Robot extends TimedRobot {
         m_robotContainer = new RobotContainer();
         
         this.setupAutonomousOptions();
+
+
     }
 
     /**
@@ -176,20 +214,23 @@ public class Robot extends TimedRobot {
         ShuffleboardTab tab = Shuffleboard.getTab("Autonomous Options");
         autonomousModes = new SendableChooser<Command>();
         autonomousModes.setDefaultOption("Test Auto",
-            m_robotContainer.getAutonomousCommand2()
-            );
+            m_robotContainer.getAutonomousCommand3()
+        );
         autonomousModes.addOption("Launch & Move Test",
         new SequentialCommandGroup(
-            m_robotContainer.getAutonomousCommand2(),
+            m_robotContainer.getAutonomousCommand3(),
             new ParallelCommandGroup(
-                new IntakeStoreForTimeCmd(6),
-                new LaunchUpliftForTimeCmd(6),
-                new LaunchUpperForTimeCmd(6)
+                new IntakeStoreForTimeCmd(),
+                new LaunchUpperForTimeCmd()
                 ),
-            m_robotContainer.getAutonomousCommand2()
+            m_robotContainer.getAutonomousCommand3()
             )
+        );
+        autonomousModes.addOption("Motor Test",
+            new LaunchUpperForTimeCmd()
         );
         tab.add("Autonomous Mode", autonomousModes).withWidget(BuiltInWidgets.kComboBoxChooser);
     }
+
 
 }
