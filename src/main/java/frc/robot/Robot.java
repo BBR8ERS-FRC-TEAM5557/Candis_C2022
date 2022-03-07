@@ -8,9 +8,6 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.IntakeStoreCmd;
-import frc.robot.commands.IntakeStoreForTimeCmd;
-import frc.robot.commands.LaunchUpperForTimeCmd;
 import frc.robot.subsystems.PneumaticSubsystem;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -213,8 +210,27 @@ public class Robot extends TimedRobot {
     private void setupAutonomousOptions() {
         ShuffleboardTab tab = Shuffleboard.getTab("Autonomous Options");
         autonomousModes = new SendableChooser<Command>();
-        autonomousModes.setDefaultOption("Test Auto",
+        autonomousModes.setDefaultOption("Red Basic 1",
+        new SequentialCommandGroup(
+            new FullLaunchForTimeCmd(),
             m_robotContainer.getAutonomousCommand3()
+            )
+        );
+        autonomousModes.addOption("Red Two Ball",
+        new SequentialCommandGroup(
+            new ParallelCommandGroup(
+                new IntakeStoreForTimeCmd(),
+                new LaunchUpperForTimeCmd()
+                ),
+            new ParallelRaceGroup(
+                m_robotContainer.getAutonomousCommand3(),
+                new FullIntakeForTimeCmd()
+                ),
+            new ParallelCommandGroup(
+                new IntakeStoreForTimeCmd(),
+                new LaunchUpperForTimeCmd()
+                )
+            )
         );
         autonomousModes.addOption("Launch & Move Test",
         new SequentialCommandGroup(

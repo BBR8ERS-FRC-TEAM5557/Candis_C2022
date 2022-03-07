@@ -61,10 +61,12 @@ public class RobotContainer {
     private void configureButtonBindings() {
         //DRIVER BUTTONS
         final JoystickButton DRIVER_RIGHT_BUMPER_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.rightBumperButton);
-        final JoystickButton DRIVER_LEFT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.leftBumperButton);
+        final JoystickButton DRIVER_LEFT_BUMPER_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.leftBumperButton);
+        final JoystickButton DRIVER_B_BUTTON = new JoystickButton(driverJoytick, XBoxConstants.bButton);
 
         DRIVER_LEFT_BUMPER_BUTTON.whenPressed(new PneumaticInCmd());
         DRIVER_RIGHT_BUMPER_BUTTON.whenPressed(new PneumaticOutCmd());
+        //DRIVER_B_BUTTON.whileHeld(rotatetotarget);
         new JoystickButton(driverJoytick, OIConstants.kDriverFieldOrientedButtonIdx).whenPressed(() -> swerveSubsystem.zeroHeading());
         
 
@@ -80,7 +82,8 @@ public class RobotContainer {
 
         MANIPULATOR_X_BUTTON.whileHeld(new IntakeInCmd());
         MANIPULATOR_A_BUTTON.whileHeld(new FullFeedLaunchCmd());
-        MANIPULATOR_Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
+        //MANIPULATOR_Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
+        MANIPULATOR_Y_BUTTON.toggleWhenPressed(new LaunchFromDistanceCmd());
         MANIPULATOR_B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
         MANIPULATOR_RIGHT_BUMPER_BUTTON.whileHeld(new ClimbUpCmd());
         MANIPULATOR_LEFT_BUMPER_BUTTON.whileHeld(new ClimbDownCmd());
@@ -205,5 +208,42 @@ public class RobotContainer {
                 swerveControllerCommand,
                 new InstantCommand(() -> swerveSubsystem.stopModules()));
     }
+    /**
+    public Command getAutonomousCommand4() {
+        String trajectoryJSON = "paths/TwoBallRed1.wpilib.json";
+        Trajectory trajectory = new Trajectory();
+        
+        try {
+                Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+                trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+             } catch (IOException ex) {
+                DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+             }
+
+        // 3. Define PID controllers for tracking trajectory
+        PIDController xController = new PIDController(AutoConstants.kPXController, 0, 0);
+        PIDController yController = new PIDController(AutoConstants.kPYController, 0, 0);
+        ProfiledPIDController thetaController = new ProfiledPIDController(
+                AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+        thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
+        // 4. Construct command to follow trajectory
+        SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
+                trajectory,
+                swerveSubsystem::getPose,
+                DriveConstants.kDriveKinematics,
+                xController,
+                yController,
+                thetaController,
+                swerveSubsystem::setModuleStates,
+                swerveSubsystem);
+
+        // 5. Add some init and wrap-up, and return everything
+        return new SequentialCommandGroup(
+                new InstantCommand(() -> swerveSubsystem.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))),
+                swerveControllerCommand,
+                new InstantCommand(() -> swerveSubsystem.stopModules()));
+    }
+     */
 
 }
