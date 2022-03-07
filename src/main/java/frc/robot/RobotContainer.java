@@ -63,17 +63,17 @@ public class RobotContainer {
         
 
         //MANIPULATOR BUTTONS
-        //final JoystickButton MANIPULATOR_A_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.aButton);
+        final JoystickButton MANIPULATOR_A_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.aButton);
         final JoystickButton MANIPULATOR_B_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.bButton);
-        //final JoystickButton MANIPULATOR_X_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.xButton);
+        final JoystickButton MANIPULATOR_X_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.xButton);
         final JoystickButton MANIPULATOR_Y_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.yButton);
         final JoystickButton MANIPULATOR_LEFT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.leftBumperButton);
         final JoystickButton MANIPULATOR_RIGHT_BUMPER_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.rightBumperButton);
         //final JoystickButton MANIPULATOR_START_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.startButton);
         //final JoystickButton MANIPULATOR_BACK_BUTTON = new JoystickButton(manipulatorController, XBoxConstants.backButton);
 
-        //MANIPULATOR_X_BUTTON.whileHeld(new FullIntakeInCmd());
-        //MANIPULATOR_A_BUTTON.whileHeld(new FullFeedLaunchCmd());
+        MANIPULATOR_X_BUTTON.whileHeld(new FullIntakeInCmd());
+        MANIPULATOR_A_BUTTON.whileHeld(new FullFeedLaunchCmd());
         MANIPULATOR_Y_BUTTON.toggleWhenPressed(new LaunchUpperCmd());
         MANIPULATOR_B_BUTTON.toggleWhenPressed(new LaunchLowerCmd());
         MANIPULATOR_RIGHT_BUMPER_BUTTON.whileHeld(new ClimbUpCmd());

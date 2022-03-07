@@ -72,9 +72,9 @@ public final class Constants {
          */
 
         //ANALOG INPUT 1
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -3.87463 - 0.251465 - (1.710205-1.96411);
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -3.87463 - 0.251465 - (1.710205-1.96411) - 1.28;
         //ANALOG INPUT 2
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -2.9024825 - 4.129 + 3.14 - (4.354248-4.195556);
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -2.9024825 - 4.129 + 3.14 - (4.354248-4.195556) - .32227 - .1852;
         //ANALOG INPUT 0
         public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -2.9583331 - 4.34375 + .33683 - (1.922607-1.989746);
         //ANALOG INPUT 3
@@ -120,8 +120,6 @@ public final class Constants {
         public static final int kDriverYAxis = 1;
         public static final int kDriverXAxis = 0;
         public static final int kDriverRotAxis = 4;
-
-        //???????
         public static final int kDriverFieldOrientedButtonIdx = 1;
 
         public static final double kDeadband = 0.05;
@@ -142,9 +140,9 @@ public final class Constants {
 
     public static final class MotorControllers {
         public static final int RIGHT_CLIMB_MOTOR_CONTROLLER_1 = 9;
-		public static final int RIGHT_CLIMB_MOTOR_CONTROLLER_2 = 10;
-		public static final int LEFT_CLIMB_MOTOR_CONTROLLER_1 = 11;
-		public static final int LEFT_CLIMB_MOTOR_CONTROLLER_2 = 12;
+		public static final int LEFT_CLIMB_MOTOR_CONTROLLER_1 = 10;
+		public static final int LEFT_CLIMB_MOTOR_CONTROLLER_2 = 11;
+		public static final int RIGHT_CLIMB_MOTOR_CONTROLLER_2 = 12;
 		public static final int INTAKE_MOTOR_CONTROLLER = 13;
 		public static final int STORE_MOTOR_CONTROLLER = 14;
 		public static final int UPLIFT_MOTOR_CONTROLLER = 15;
