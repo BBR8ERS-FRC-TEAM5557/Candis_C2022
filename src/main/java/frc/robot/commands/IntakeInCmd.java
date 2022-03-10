@@ -34,6 +34,7 @@ public class IntakeInCmd extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.stopSpinIntake();
+    intake.stopSpinStore();
   }
 
   // Returns true when the command should end.

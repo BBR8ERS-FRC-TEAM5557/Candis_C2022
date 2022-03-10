@@ -24,20 +24,17 @@ public class IntakeSubsystem extends SubsystemBase {
     return instance;
   }
 
-  private CANSparkMax intakeMotor, storeMotor;
+  private CANSparkMax intakeMotor, storeMotor, upliftMotor;
 
   public IntakeSubsystem() {
 		this.intakeMotor = new CANSparkMax(MotorControllers.INTAKE_MOTOR_CONTROLLER, MotorType.kBrushless);
     this.storeMotor = new CANSparkMax(MotorControllers.STORE_MOTOR_CONTROLLER, MotorType.kBrushless);
+    this.upliftMotor = new CANSparkMax(MotorControllers.UPLIFT_MOTOR_CONTROLLER, MotorType.kBrushless);
         
 	}
 
   public void spinIntakeIn() {
-    intakeMotor.set(0.5);
-  }
-
-  public void spinIntakeOut() {
-    intakeMotor.set(-0.5);
+    intakeMotor.set(-.5);
   }
 
   public void stopSpinIntake() {
@@ -45,11 +42,19 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void spinStore(){
-    storeMotor.set(0.5);
+    storeMotor.set(.3);
   }
 
   public void stopSpinStore(){
     storeMotor.set(0);
+  }
+
+  public void spinUplift() {
+    upliftMotor.set(0.8);
+  }
+
+  public void stopUplift(){
+    upliftMotor.set(0);
   }
 
 }

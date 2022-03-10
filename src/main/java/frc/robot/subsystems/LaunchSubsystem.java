@@ -24,23 +24,22 @@ public class LaunchSubsystem extends SubsystemBase {
     return instance;
   }
 
-  private CANSparkMax leftLaunchMotor, rightLaunchMotor, upliftMotor;
+  private CANSparkMax leftLaunchMotor, rightLaunchMotor;
 
   public LaunchSubsystem() {
 		this.leftLaunchMotor = new CANSparkMax(MotorControllers.LEFT_LAUNCH_MOTOR_CONTROLLER, MotorType.kBrushless);
     this.rightLaunchMotor = new CANSparkMax(MotorControllers.RIGHT_LAUNCH_MOTOR_CONTROLLER, MotorType.kBrushless);
-    this.upliftMotor = new CANSparkMax(MotorControllers.UPLIFT_MOTOR_CONTROLLER, MotorType.kBrushless);
         
 	}
 
   public void launchUpper() {
-    leftLaunchMotor.set(0.7);
-    rightLaunchMotor.set(-0.7);
+    leftLaunchMotor.set(-0.7);
+    rightLaunchMotor.set(0.7);
   }
 
   public void launchLower() {
-    leftLaunchMotor.set(0.3);
-    rightLaunchMotor.set(-0.3);
+    leftLaunchMotor.set(-0.6);
+    rightLaunchMotor.set(0.6);
   }
 
   public void launch(double speed) {
@@ -53,12 +52,5 @@ public class LaunchSubsystem extends SubsystemBase {
     rightLaunchMotor.set(0);
   }
 
-  public void spinUplift() {
-    upliftMotor.set(0.4);
-  }
-
-  public void stopUplift(){
-    upliftMotor.set(0);
-  }
 
 }

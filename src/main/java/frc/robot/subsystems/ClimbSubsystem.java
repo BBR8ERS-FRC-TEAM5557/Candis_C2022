@@ -34,17 +34,17 @@ public class ClimbSubsystem extends SubsystemBase {
 	}
 
   public void climbUp() {
-    rightClimbMotor1.set(0.2);
-    rightClimbMotor2.set(-0.2);
-    leftClimbMotor1.set(0.2);
-    leftClimbMotor2.set(-0.2);
+    rightClimbMotor1.set(.01);
+    rightClimbMotor2.set(-.01);
+    leftClimbMotor1.set(.01);
+    leftClimbMotor2.set(-.01);
   }
 
   public void climbDown() {
-    rightClimbMotor1.set(-0.2);
-    rightClimbMotor2.set(0.2);
-    leftClimbMotor1.set(-0.2);
-    leftClimbMotor2.set(0.2);
+    rightClimbMotor1.set(-.01);
+    rightClimbMotor2.set(.01);
+    leftClimbMotor1.set(-.01);
+    leftClimbMotor2.set(.01);
   }
 
   public void climbStop() {

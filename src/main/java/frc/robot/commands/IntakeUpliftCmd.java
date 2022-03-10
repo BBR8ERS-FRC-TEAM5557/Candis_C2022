@@ -6,16 +6,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.LaunchSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class LaunchUpliftCmd extends CommandBase {
+public class IntakeUpliftCmd extends CommandBase {
   /** Creates a new IntakeIn. */
-  LaunchSubsystem launch;
+  IntakeSubsystem intake;
 
-  public LaunchUpliftCmd() {
+  public IntakeUpliftCmd() {
     // Use addRequirements() here to declare subsystem dependencies.
-    launch = LaunchSubsystem.getInstance();
-    addRequirements(launch);
+    intake = IntakeSubsystem.getInstance();
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
@@ -26,13 +26,13 @@ public class LaunchUpliftCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    launch.spinUplift();
+    intake.spinUplift();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launch.stopUplift();
+    intake.stopUplift();
   }
 
   // Returns true when the command should end.

@@ -37,7 +37,7 @@ public class FullLaunchForTimeCmd extends CommandBase  {
   @Override
   public void execute() {
     launch.launchUpper();
-    launch.spinUplift();
+    intake.spinUplift();
     intake.spinStore();
   }
 
@@ -45,7 +45,7 @@ public class FullLaunchForTimeCmd extends CommandBase  {
   @Override
   public void end(boolean interrupted) {
     launch.stopLaunch();
-    launch.stopUplift();
+    intake.stopUplift();
     intake.stopSpinStore();
   }
 
