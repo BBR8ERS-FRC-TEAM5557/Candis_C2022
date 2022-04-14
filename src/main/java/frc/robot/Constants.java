@@ -20,9 +20,9 @@ public final class Constants {
 
     public static final class DriveConstants {
 
-        public static final double kTrackWidth = Units.inchesToMeters(30);
+        public static final double kTrackWidth = Units.inchesToMeters(28);
         // Distance between right and left wheels
-        public static final double kWheelBase = Units.inchesToMeters(30);
+        public static final double kWheelBase = Units.inchesToMeters(28);
         // Distance between front and back wheels
         public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
                 new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
@@ -45,10 +45,10 @@ public final class Constants {
         public static final boolean kFrontRightTurningEncoderReversed = true;
         public static final boolean kBackRightTurningEncoderReversed = true;
 
-        public static final boolean kFrontLeftDriveEncoderReversed = true;
-        public static final boolean kBackLeftDriveEncoderReversed = true;
-        public static final boolean kFrontRightDriveEncoderReversed = false;
-        public static final boolean kBackRightDriveEncoderReversed = false;
+        public static final boolean kFrontLeftDriveEncoderReversed = false;
+        public static final boolean kBackLeftDriveEncoderReversed = false;
+        public static final boolean kFrontRightDriveEncoderReversed = true;
+        public static final boolean kBackRightDriveEncoderReversed = true;
 
         public static final int kFrontLeftDriveAbsoluteEncoderPort = 1;
         public static final int kBackLeftDriveAbsoluteEncoderPort = 2;
@@ -60,21 +60,39 @@ public final class Constants {
         public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
         public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -Math.toRadians(42);
+        /**
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -Math.toRadians(42 + 180);
         //-0.254;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -Math.toRadians(336.3 + 180);
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -Math.toRadians(336.3 + 180 + 10);
         //-1.252;
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -Math.toRadians(169.5 + 180);
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -Math.toRadians(169.5);
         //-1.816;
         public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -Math.toRadians(136.8 + 180 + 180);
         //-4.811;
+         */
 
-        public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
-        public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
+        //ANALOG INPUT 1
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -3.87463 - 0.251465 - (1.710205-1.96411) - 1.28;
+        //ANALOG INPUT 2
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -2.9024825 - 4.129 + 3.14 - (4.354248-4.195556) - .32227 - .1852;
+        //ANALOG INPUT 0
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -2.9583331 - 4.34375 + .33683 - (1.922607-1.989746);
+        //ANALOG INPUT 3
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -2.3876104 - .38699 + .2985 - (0.52124-0.526123);
 
-        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4;
+        //CHECK MAX SPEED ROBOT TRAVELS IN NORMALIZE FUNCTION (DEFAULT - 5)
+        public static final double kPhysicalMaxSpeedMetersPerSecond = 10;
+
+        //CHECK MAX SPEED ROBOT SPIINS IN NORMALIZE FUNCTION (DEFAULT - 2 * 2 * Math.PI)
+        public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 4 * 2 * Math.PI;
+
+        //TRANSLATION SPEED IN TELOP (DEFAULT - kPhysicalMaxSpeedMetersPerSecond / 4)
+        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 2;
+
+        //ROTATION SPEED IN TELOP (DEFAULT - kPhysicalMaxAngularSpeedRadiansPerSecond / 4)
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = //
-                kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
+                kPhysicalMaxAngularSpeedRadiansPerSecond / 2;
+
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
     }
@@ -97,6 +115,7 @@ public final class Constants {
 
     public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
+        public static final int kManipulatorControllerPort = 1;
 
         public static final int kDriverYAxis = 1;
         public static final int kDriverXAxis = 0;
@@ -105,4 +124,32 @@ public final class Constants {
 
         public static final double kDeadband = 0.05;
     }
+
+    public static final class XBoxConstants {
+        public static final int aButton = 1;
+		public static final int bButton = 2;
+		public static final int xButton = 3;
+		public static final int yButton = 4;
+		public static final int leftBumperButton = 5;
+		public static final int rightBumperButton = 6;
+		public static final int backButton = 7;
+		public static final int startButton = 8;
+		public static final int leftStickButton = 9;
+		public static final int rightStickButton = 10;
+    }
+
+    public static final class MotorControllers {
+        public static final int RIGHT_CLIMB_MOTOR_CONTROLLER_1 = 9;
+		public static final int LEFT_CLIMB_MOTOR_CONTROLLER_1 = 10;
+		public static final int LEFT_CLIMB_MOTOR_CONTROLLER_2 = 11;
+		public static final int RIGHT_CLIMB_MOTOR_CONTROLLER_2 = 12;
+		public static final int INTAKE_MOTOR_CONTROLLER = 17;
+		public static final int STORE_MOTOR_CONTROLLER = 16;
+		public static final int UPLIFT_MOTOR_CONTROLLER = 15;
+		public static final int LEFT_LAUNCH_MOTOR_CONTROLLER = 14;
+		public static final int RIGHT_LAUNCH_MOTOR_CONTROLLER = 13;
+    }
+
+   
 }
+

@@ -15,8 +15,20 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.networktables.NetworkTableEntry;
+
 
 public class SwerveSubsystem extends SubsystemBase {
+
+    public static SwerveSubsystem instance = null;
+    
+    public static SwerveSubsystem getInstance() {
+        if (instance == null) {
+          instance = new SwerveSubsystem();
+        }
+        return instance;
+      }
+
     private final SwerveModule frontLeft = new SwerveModule(
             DriveConstants.kFrontLeftDriveMotorPort,
             DriveConstants.kFrontLeftTurningMotorPort,
@@ -65,28 +77,9 @@ public class SwerveSubsystem extends SubsystemBase {
             } catch (Exception e) {
             }
         }).start();
-        /** 
-        ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
-        poseXEntry = tab.add("Pose X", 0.0).withPosition(0, 0).withSize(1, 1).getEntry();
-        poseYEntry = tab.add("Pose Y", 0.0).withPosition(0, 1).withSize(1, 1).getEntry();
-        poseAngleEntry = tab.add("Pose Angle", 0.0).withPosition(0, 2).withSize(1, 1).getEntry();
-
-        ShuffleboardLayout frontLeftModuleContainer = tab.getLayout("Front Left Module", BuiltInLayouts.kList)
-            .withPosition(1, 0).withSize(2, 3);
-        moduleAngleEntries[0] = frontLeftModuleContainer.add("Angle", 0.0).getEntry();
-
-        ShuffleboardLayout frontRightModuleContainer = tab.getLayout("Front Right Module", BuiltInLayouts.kList)
-            .withPosition(3, 0).withSize(2, 3);
-        moduleAngleEntries[1] = frontRightModuleContainer.add("Angle", 0.0).getEntry();
-
-        ShuffleboardLayout backLeftModuleContainer = tab.getLayout("Back Left Module", BuiltInLayouts.kList)
-            .withPosition(5, 0).withSize(2, 3);
-        moduleAngleEntries[2] = backLeftModuleContainer.add("Angle", 0.0).getEntry();
-
-        ShuffleboardLayout backRightModuleContainer = tab.getLayout("Back Right Module", BuiltInLayouts.kList)
-            .withPosition(7, 0).withSize(2, 3);
-        moduleAngleEntries[3] = backRightModuleContainer.add("Angle", 0.0).getEntry();
-        */
+        
+        
+        //SmartDashboard.putNumber("swerve angle lawl", modules[0].getAbsoluteEncoderRad());
     }
 
     public void zeroHeading() {
@@ -108,6 +101,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public void resetOdometry(Pose2d pose) {
         odometer.resetPosition(pose, getRotation2d());
     }
+    
 
     @Override
     public void periodic() {
@@ -115,6 +109,8 @@ public class SwerveSubsystem extends SubsystemBase {
                 backRight.getState());
         SmartDashboard.putNumber("Robot Heading", getHeading());
         SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
+        
+
     }
 
     public void stopModules() {
@@ -125,11 +121,13 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
+        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kPhysicalMaxSpeedMetersPerSecond * 10);
         frontLeft.setDesiredState(desiredStates[0]);
         frontRight.setDesiredState(desiredStates[1]);
         backLeft.setDesiredState(desiredStates[2]);
         backRight.setDesiredState(desiredStates[3]);
     }
+
+    
 
 }
